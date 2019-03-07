@@ -1,0 +1,53 @@
+{
+  "name": "customer_app_rn",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "appcenter": "^1.8.1",
+    "appcenter-analytics": "^1.8.1",
+    "appcenter-crashes": "^1.8.1",
+    "react": "16.5.0",
+    "react-native": "0.57.1",
+    "react-native-branch": "^2.3.3",
+    "react-native-code-push": "^5.4.2",
+    "react-native-device-info": "^0.22.6",
+    "react-native-elements": "^0.19.1",
+    "react-native-firebase": "^5.0.0",
+    "react-native-geocoding": "^0.3.0",
+    "react-native-google-places-autocomplete": "^1.3.9",
+    "react-native-maps": "^0.22.0",
+    "react-native-prompt-android": "^0.3.4",
+    "react-native-push-notification": "^3.1.1",
+    "react-native-share": "^1.1.2",
+    "react-native-simple-toast": "0.0.8",
+    "react-native-star-rating": "^1.1.0",
+    "react-native-switch": "^1.5.0",
+    "react-native-user-avatar": "^1.0.3",
+    "react-native-vector-icons": "^6.0.0",
+    "react-navigation": "^2.16.0",
+    "redux": "^4.0.1",
+    "rn-viewpager": "^1.2.9",
+    "semver": "5.5.1",
+    "string-format": "^2.0.0",
+    "xrange": "^1.0.1"
+  },
+  "devDependencies": {
+    "@babel/runtime": "7.0.0-beta.47",
+    "babel-jest": "23.6.0",
+    "jest": "23.6.0",
+    "metro-react-native-babel-preset": "0.46.0",
+    "react-test-renderer": "16.5.0"
+  },
+  "jest": {
+    "preset": "react-native",
+    "setupFiles": [
+      "<rootDir>/node_modules/appcenter/test/AppCenterMock.js",
+      "<rootDir>/node_modules/appcenter-analytics/test/AppCenterAnalyticsMock.js",
+      "<rootDir>/node_modules/appcenter-crashes/test/AppCenterCrashesMock.js"
+    ]
+  }
+}
