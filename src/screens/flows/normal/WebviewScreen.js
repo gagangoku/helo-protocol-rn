@@ -27,7 +27,9 @@ export default class WebviewScreen extends React.Component {
         this.webview = r;
     }
     render() {
-        const processNavFn = this.props.processNavFn || this.ctx.processNavFn;
+        const noOpFn = () => {};
+        const processNavFn = this.props.processNavFn || this.ctx.processNavFn || noOpFn;
+        const onMessageFn = this.props.onMessageFn || this.ctx.onMessageFn || noOpFn;
         const onNavigationStateChange = (x) => {
             console.log('onNavigationStateChange: ', x);
             const url = x['url'];
@@ -43,7 +45,7 @@ export default class WebviewScreen extends React.Component {
             <View style={{ height: '100%', width: '100%' }}>
                 <View style={{ height: '100%' }}>
                     <WebView useWebKit={true} source={{uri: this.ctx.url}} ref={r => this.updateRef(r)}
-                             onNavigationStateChange={onNavigationStateChange} />
+                             onNavigationStateChange={onNavigationStateChange} onMessage={onMessageFn} />
                 </View>
             </View>
         );

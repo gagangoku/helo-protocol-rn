@@ -3,9 +3,8 @@ import {Dimensions, StyleSheet, Text, TouchableHighlight, View} from "react-nati
 import common from '../styles/common';
 import {getContext, navigateTo, resetNavigation} from '../util/Util';
 import {TEXT_COLOR} from "../Styles";
-import Toast from "react-native-simple-toast";
-import CustomerProfileScreen from "./flows/normal/CustomerProfileScreen";
 import WebviewScreen from "./flows/normal/WebviewScreen";
+import SplashScreen from "./SplashScreen";
 
 
 export default class PurposeScreen extends React.Component {
@@ -19,15 +18,16 @@ export default class PurposeScreen extends React.Component {
         this.ctx = getContext(props);
     }
 
-    processNavFn = (url, title) => {
-        if (url.includes('/customer/thank-you') && title.toLowerCase().includes('success')) {
-            // Payment succeeded
-            Toast.show('Signup successful !', Toast.LONG);
-            resetNavigation(this, CustomerProfileScreen.URL);
+    onMessageFn = (m) => {
+        const data = m.nativeEvent.data;
+        console.log('window.postMessage: ', data);
+        if (data === 'success') {
+            // Goto splash screen after 2 seconds
+            setTimeout(() => resetNavigation(this, SplashScreen.URL), 2000);
         }
     };
     signup = () => {
-        navigateTo(this, WebviewScreen.URL, { url: SIGNUP_URL, processNavFn: this.processNavFn });
+        navigateTo(this, WebviewScreen.URL, { url: SIGNUP_URL + '?phoneNumber=' + this.ctx.phoneNumber, onMessageFn: this.onMessageFn });
     };
     render() {
         const reviewDiv = (
@@ -54,7 +54,6 @@ export default class PurposeScreen extends React.Component {
                             </View>
                         </TouchableHighlight>
                     </View>
-                    {reviewDiv}
                     <View style={custom.buttonSection}>
                         <TouchableHighlight underlayColor="white" onPress={this.signup}>
                             <View style={[custom.purposeButton]}>
@@ -73,6 +72,7 @@ export default class PurposeScreen extends React.Component {
 }
 
 const SIGNUP_URL = 'https://www.heloprotocol.in/customer/entry';
+// const SIGNUP_URL = 'http://192.168.0.104:8092/customer/entry';
 const dimWidth = Dimensions.get('window').width;
 const dimHeight = Dimensions.get('window').height;
 const btnPadding = 14;

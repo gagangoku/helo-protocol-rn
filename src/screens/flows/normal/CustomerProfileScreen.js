@@ -15,7 +15,7 @@ import phoneIcon from "../../../images/phone.png";
 import calendarIcon from '../../../images/calendar-400-bw.png';
 import common from "../../../styles/common";
 import {CUSTOMER_CARE_NUMBER} from '../../../Constants';
-import logo from '../../../images/splash/1stscreen.png';
+import logo from '../../../images/splash/1stscreen-bkp.png';
 import TodaysCooking from "../../../widgets/TodaysCooking";
 import HowDoesReferralWorkScreen from "./HowDoesReferralWorkScreen";
 import {CookFullProfileScreen} from "./CookFullProfileScreen";
@@ -189,7 +189,7 @@ export default class CustomerProfileScreen extends React.Component {
         }
 
         const rejectFn = () => {};
-        const url = format('https://www.heloprotocol.in/person/{}?disableCallBtn=true&showHeader=false', supply.person.id);
+        const url = format('https://www.heloprotocol.in/person/{}/?disableCallBtn=true&showHeader=false', supply.person.id);
         const showProfileFn = () => navigateTo(this, WebviewScreen.URL, {url});
         return (
             <View key={supply.person.id + ''} style={[custom.supplyEntry, { height: 60 }]}>
@@ -288,7 +288,7 @@ export default class CustomerProfileScreen extends React.Component {
                     </Text>
                     <Text style={custom.textLine}>
                         In case you were not able to get through, please try again later. They might be working or otherwise busy.
-                        The best time to call most workers is between 11.30 am - 2 pm or 8pm - 10pm.
+                        The best time to call most workers is between 2 pm - 6 pm.
                     </Text>
                 </View>
 
