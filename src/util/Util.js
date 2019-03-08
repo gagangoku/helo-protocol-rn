@@ -179,9 +179,9 @@ export function getTopic(phoneNumber) {
     return 'customer-app-' + phoneNumber;
 }
 
-export function spacer(h=10) {
+export function spacer(h=10, w=0) {
     return (
-        <View style={{ height: h, borderWidth: 0 }} />
+        <View style={{ height: h, width: w, borderWidth: 0 }} />
     );
 }
 

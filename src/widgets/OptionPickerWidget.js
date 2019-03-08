@@ -1,8 +1,6 @@
 import React from "react";
+import {capitalizeFirstLetter, getKeysWhereValueIs} from '../util/Util';
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import {BUTTON_BACKGROUND_COLOR, TEXT_COLOR} from "../Styles";
-import common from "../styles/common";
-import {capitalizeFirstLetter} from "../util/Util";
 
 
 export default class OptionPickerWidget extends React.Component {
@@ -11,9 +9,16 @@ export default class OptionPickerWidget extends React.Component {
 
         let clicked = {};
         this.props.optionList.forEach(y => {clicked[PREFIX + y] = false});
+        (this.props.initialSelected || []).forEach(y => {
+            clicked[PREFIX + y] = true;
+            this.props.toggleFn(y, true);
+        });
+
         this.state = {
             ...clicked,
         };
+        this.displayFn = this.props.displayFn || this.normalizeEnumForDisplay;
+        this.singleSelection = this.props.singleSelection || false;
     }
 
     normalizeEnumForDisplay = (str) => {
@@ -24,8 +29,9 @@ export default class OptionPickerWidget extends React.Component {
         const A = this.props.optionList.map(x => this.box(PREFIX, x, () => this.toggle(PREFIX, x)));
 
         return (
-            <View style={[common.justifyAlignCenter, {width: '100%'}]}>
-                <Text style={custom.subHeading}>{this.props.heading}</Text>
+            <View style={[custom.justifyAlignCenter, {width: '100%'}]}>
+                <Text style={custom.heading}>{this.props.heading}</Text>
+                <Text style={custom.subHeading}>{this.props.subHeading || ''}</Text>
                 <View style={custom.itemsContainer}>
                     {A}
                 </View>
@@ -36,6 +42,14 @@ export default class OptionPickerWidget extends React.Component {
     toggle(prefix, key) {
         const k = prefix + key;
         const newVal = !this.state[k];
+        if (this.singleSelection) {
+            const selected = getKeysWhereValueIs(this.state, true);
+            if (selected.length > 0) {
+                this.setState({ [selected[0]]: false });
+                this.props.toggleFn(selected[0].split(PREFIX)[1], false);
+            }
+        }
+
         this.setState({ [k]: newVal });
         this.props.toggleFn(key, newVal);
         console.log('toggle: ', k, key);
@@ -46,11 +60,12 @@ export default class OptionPickerWidget extends React.Component {
         const boxStyle = this.state[k] ? custom.selectedBackground : custom.notSelectedBackground;
         const textStyle = this.state[k] ? custom.buttonTextSelected : custom.buttonTextNotSelected;
         const styleOverrides = this.props.styleOverrides || {};
+        const val = this.displayFn(key);
 
         return (
             <View style={[custom.boxContainer, boxStyle, styleOverrides]} key={k}>
-                <TouchableOpacity onPress={cb} style={common.justifyAlignCenter}>
-                    <Text style={[custom.boxText, textStyle]}>{this.normalizeEnumForDisplay(key)}</Text>
+                <TouchableOpacity onPress={cb} style={custom.justifyAlignCenter}>
+                    <Text style={[custom.boxText, textStyle]}>{val}</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -58,11 +73,20 @@ export default class OptionPickerWidget extends React.Component {
 }
 
 const PREFIX = 'cui-';
+
+export const BUTTON_BACKGROUND_COLOR = '#4d4d4d';
+export const TEXT_COLOR = '#404040';
+
 const custom = StyleSheet.create({
     selectedBackground: {
         backgroundColor: BUTTON_BACKGROUND_COLOR,
+        borderWidth: 1,
+        borderColor: BUTTON_BACKGROUND_COLOR,
     },
     notSelectedBackground: {
+        backgroundColor: 'white',
+        borderWidth: 1,
+        borderColor: BUTTON_BACKGROUND_COLOR,
     },
     boxContainer: {
         marginLeft: 5,
@@ -76,11 +100,17 @@ const custom = StyleSheet.create({
         borderRadius: 5,
         borderWidth: 1,
         borderColor: BUTTON_BACKGROUND_COLOR,
+
+        // NOTE: These properties apply to web
+        // userSelect: 'none',
+        // MozUserSelect: 'none',
+        // WebkitUserSelect: 'none',
+        // msUserSelect: 'none',
     },
     boxText: {
         padding: 10,
         textAlign: 'center',
-        fontSize: 17,
+        fontSize: 16,
     },
     buttonTextSelected: {
         color: 'white',
@@ -89,15 +119,29 @@ const custom = StyleSheet.create({
         color: TEXT_COLOR,
     },
 
-    subHeading: {
-        margin: 5,
-        marginLeft: 10,
-        fontSize: 19,
+    heading: {
+        fontSize: 18,
+        fontWeight: '600',
         color: TEXT_COLOR,
+        width: '100%',
+        textAlign: 'center',
+    },
+    subHeading: {
+        fontSize: 15,
+        fontWeight: '400',
+        color: TEXT_COLOR,
+        width: '100%',
+        textAlign: 'center',
     },
     itemsContainer: {
+        display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
+    },
+
+    justifyAlignCenter: {
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 });

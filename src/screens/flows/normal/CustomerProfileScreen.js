@@ -192,13 +192,13 @@ export default class CustomerProfileScreen extends React.Component {
         const showProfileFn = () => navigateTo(this, WebviewScreen.URL, {url});
         return (
             <View key={supply.person.id + ''} style={[custom.supplyEntry, { height: 60 }]}>
-                <View style={{width: '70%'}}>
-                    <TouchableOpacity onPress={showProfileFn}>
-                        <Text style={custom.supplyEntrySupplyName}>{supply.person.name.toUpperCase()}</Text>
-                    </TouchableOpacity>
+                <View style={{width: '50%'}}>
+                    <Text style={custom.supplyEntrySupplyName}>{supply.person.name.toUpperCase()}</Text>
                 </View>
 
-                <View style={{ width: '30%'}}>
+                <View style={{ width: '50%', flexDirection: 'row' }}>
+                    {this.callButton(showProfileFn, 'VIEW')}
+                    {spacer(0, 10)}
                     {this.callButton(() => this.callSupply(supply), 'CALL')}
                 </View>
             </View>
@@ -237,6 +237,11 @@ export default class CustomerProfileScreen extends React.Component {
         }
 
         this.setState({ modalOpen: false, supplyCalled: null });
+
+        // Reset
+        this.callWentWell = {};
+        this.callWentBad = {};
+        this.demoScheduled = {};
     };
 
     supplyCalledModal = () => {
@@ -259,7 +264,7 @@ export default class CustomerProfileScreen extends React.Component {
                             <OptionPickerWidget heading={'What did not ?'} optionList={CALL_DID_NOT_GO_WELL} toggleFn={this.setFn('callWentBad')} />
                             {spacer(20)}
 
-                            <OptionPickerWidget heading={'Is demo scheduled ?'} optionList={IS_DEMO_SCHEDULED}
+                            <OptionPickerWidget heading={'Is demo scheduled ?'} optionList={IS_DEMO_SCHEDULED} singleSelection={true}
                                                 toggleFn={this.setFn('demoScheduled')} />
                             {spacer(20)}
 
