@@ -14,7 +14,7 @@ import {
 import {getContext, resetNavigation} from "../../../util/Util";
 import xrange from 'xrange';
 import common from '../../../styles/common.js';
-import logo from '../../../images/logo.png';
+import logo from '../../../images/splash/1stscreen.png';
 import {isFirebaseEnabled, subscribeToTopic} from "../../../NativeBindings";
 import PurposeScreen from "../../PurposeScreen";
 import {getCustomerProfile, getOtp} from "../../../util/Api";

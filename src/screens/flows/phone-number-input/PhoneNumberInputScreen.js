@@ -1,7 +1,7 @@
 import React from "react";
 import {Dimensions, Image, ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, View} from "react-native";
 import common from '../../../styles/common.js';
-import logo from '../../../images/logo.png';
+import logo from '../../../images/splash/1stscreen.png';
 import {getContext, navigateTo} from "../../../util/Util";
 import {shallowCopyInto} from "../../../Constants";
 import OtpInputScreen from "./OtpInputScreen";

@@ -44,7 +44,7 @@ export default class WebviewScreen extends React.Component {
         return (
             <View style={{ height: '100%', width: '100%' }}>
                 <View style={{ height: '100%' }}>
-                    <WebView useWebKit={true} source={{uri: this.ctx.url}} ref={r => this.updateRef(r)}
+                    <WebView useWebKit={true} source={{uri: this.ctx.url}} ref={r => this.updateRef(r)} geolocationEnabled={true}
                              onNavigationStateChange={onNavigationStateChange} onMessage={onMessageFn} />
                 </View>
             </View>

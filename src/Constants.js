@@ -5,7 +5,7 @@ import {Dimensions, Platform} from "react-native";
 // NOTE: Unable to get the correct appVersion from codepush update. Also, codepush only updates the JS bundle,
 // so the installed appVersion won't change. Hence, the version number is set in JS here.
 // NOTE: Do not forget to update this version everytime you release a codepush / playstore update.
-export const APP_VERSION = '1.0.3';
+export const APP_VERSION = '1.0.4';
 
 export const HOST = 'https://api.heloprotocol.in';
 // export const HOST = 'http://192.168.0.105:7071';
