@@ -28,7 +28,7 @@ export const OTHER_INTERESTS_API = '/v2/crm/customer/other_interests';
 export const RATING_SUBMIT_API = '/v2/ratings/rate';
 export const COOK_RECOMMENDATION_API = '/v2/ratings/cook_recommendation';
 export const MAP_CUSTOMER_SUPPLY_PHONE_API = '/v1/exotel/get_connect_number';
-export const SUBMIT_CALL_STATUS_API = '/v1/new-jobs/customer_to_cook_call_status';
+export const SUBMIT_CALL_STATUS_API = '/v1/new-jobs/customer_to_supply_call_status';
 
 export const X_ROLE_HEADER = "X-Role";
 

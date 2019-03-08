@@ -61,6 +61,8 @@ export default class CustomerProfileScreen extends React.Component {
         super(props);
         this.ctx = getContext(props);
         this.customerProfile = this.ctx.customerProfile;
+        this.customerId = this.customerProfile['customer'].person.id;
+
         this.state = {
             modalOpen: false,
             supplyCalled: null,
@@ -94,8 +96,6 @@ export default class CustomerProfileScreen extends React.Component {
         const _showSupplyProfile = () => {
             navigateTo(this, CookFullProfileScreen.URL);
         };
-
-        const customerId = customer['person']['id'];
 
         const avatarRadius = 60;
         const textStyle = { color: TEXT_COLOR, padding: 0, margin: 0 };
@@ -140,7 +140,7 @@ export default class CustomerProfileScreen extends React.Component {
 
                 {spacer(40)}
                 <View style={{ height: 70, marginBottom: 10 }}>
-                    {buttonWithText('SHARE to earn referral bonus', () => referFriends(customerId))}
+                    {buttonWithText('SHARE to earn referral bonus', () => referFriends(this.customerId))}
                     {spacer(10)}
                     <TouchableOpacity style={{ height: 20 }} onPress={() => this.howDoReferralsWork()}>
                         <View style={{ alignItems: 'center' }}>
@@ -153,11 +153,10 @@ export default class CustomerProfileScreen extends React.Component {
     }
 
     callSupply = async (supplyProfile) => {
-        const customerPhone = this.customerProfile['customer'].person.phone.phoneNumber;
         const supplyId = supplyProfile.person.id;
 
         try {
-            const phoneToCall = await mapPhoneApi(customerPhone, supplyId);
+            const phoneToCall = await mapPhoneApi(this.customerId, supplyId);
             console.log('Phone mapping response: ', phoneToCall);
 
             if (phoneToCall) {
@@ -231,7 +230,7 @@ export default class CustomerProfileScreen extends React.Component {
             return;
         }
 
-        const rsp = await submitCallStatus({cookId: supplyId, callWentWell, callWentBad, demoScheduled});
+        const rsp = await submitCallStatus({ customerId: this.customerId, supplyId, callWentWell, callWentBad, demoScheduled});
         if (rsp !== 'ok') {
             window.alert('Something went wrong. Please try again or call ' + CUSTOMER_CARE_NUMBER);
             return;
@@ -260,7 +259,8 @@ export default class CustomerProfileScreen extends React.Component {
                             <OptionPickerWidget heading={'What did not ?'} optionList={CALL_DID_NOT_GO_WELL} toggleFn={this.setFn('callWentBad')} />
                             {spacer(20)}
 
-                            <OptionPickerWidget heading={'Is demo scheduled ?'} optionList={IS_DEMO_SCHEDULED} toggleFn={this.setFn('demoScheduled')} />
+                            <OptionPickerWidget heading={'Is demo scheduled ?'} optionList={IS_DEMO_SCHEDULED}
+                                                toggleFn={this.setFn('demoScheduled')} />
                             {spacer(20)}
 
                             {buttonWithText('SUBMIT', () => this.submitModal())}
@@ -288,7 +288,7 @@ export default class CustomerProfileScreen extends React.Component {
                     </Text>
                     <Text style={custom.textLine}>
                         In case you were not able to get through, please try again later. They might be working or otherwise busy.
-                        The best time to call most workers is between 2 pm - 6 pm.
+                        The best time to call most workers is between 2 pm - 8 pm.
                     </Text>
                 </View>
 
@@ -328,14 +328,13 @@ export default class CustomerProfileScreen extends React.Component {
         }
 
         const textStyle = { color: TEXT_COLOR, padding: 0, margin: 0 };
-        const customerId = this.customerProfile['customer']['person']['id'];
         return (
             <View style={common.container}>
                 <View style={{ height: 40}} />
 
                 <Image source={logo} style={custom.regImage}/>
 
-                <View style={{ height: 40}} />
+                <View style={{ height: 40 }} />
                 <View style={{ borderWidth: 0 }}>
                     <Text style={[common.heading]}>We are trying to find people near you.</Text>
                 </View>
@@ -355,7 +354,7 @@ export default class CustomerProfileScreen extends React.Component {
                 </View>
 
                 <View style={{ height: 100 }} />
-                {buttonWithText('SHARE to earn referral bonus', () => referFriends(customerId))}
+                {buttonWithText('SHARE to earn referral bonus', () => referFriends(this.customerId))}
                 <View style={{ alignItems: 'center', flex: 1 }}>
                     <TouchableOpacity style={{ }} onPress={() => this.howDoReferralsWork()}>
                         <Text style={[textStyle, { fontSize: 14, color: 'blue' }]}>How do referrals work ?</Text>

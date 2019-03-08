@@ -125,8 +125,8 @@ export const signupForFreePlan = async (cookFeedback) => {
     }
 };
 
-export const mapPhoneApi = async (customerPhone, supplyId) => {
-    const url = format(HOST + MAP_CUSTOMER_SUPPLY_PHONE_API + '?customerPhone={}&supplyId={}', customerPhone, supplyId);
+export const mapPhoneApi = async (customerId, supplyId) => {
+    const url = format(HOST + MAP_CUSTOMER_SUPPLY_PHONE_API + '?customerId={}&supplyId={}', customerId, supplyId);
     console.log(url);
     const response = await fetch(url, { headers: {...customerRoleHeader, [X_AUTH_HEADER]: X_AUTH_TOKEN}, method: 'PUT' });
     if (response.status >= 200 && response.status < 300) {
