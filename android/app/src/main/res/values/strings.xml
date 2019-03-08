@@ -1,5 +1,5 @@
 <resources>
-    <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">sOEHpSnhGBhAvdgxqIvbV7cC_WB3BJOWMzHqQ</string>
+    <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">YcoPjhkVGsWnfvhZLiT0YMCN3cYiHyrVcKyv4</string>
     <string name="app_name">Helo</string>
     <string name="appCenterAnalytics_whenToEnableAnalytics" moduleConfig="true">ALWAYS_SEND</string>
     <string name="appCenterCrashes_whenToSendCrashes" moduleConfig="true">ALWAYS_SEND</string>

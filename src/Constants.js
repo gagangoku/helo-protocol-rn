@@ -5,7 +5,7 @@ import {Dimensions, Platform} from "react-native";
 // NOTE: Unable to get the correct appVersion from codepush update. Also, codepush only updates the JS bundle,
 // so the installed appVersion won't change. Hence, the version number is set in JS here.
 // NOTE: Do not forget to update this version everytime you release a codepush / playstore update.
-export const APP_VERSION = '1.0.1';
+export const APP_VERSION = '1.0.3';
 
 export const HOST = 'https://api.heloprotocol.in';
 // export const HOST = 'http://192.168.0.105:7071';
@@ -114,8 +114,8 @@ export const BAD_HABITS = [
 
 export const PLATFORM_ANDROID = 'android';
 export const PLATFORM_IOS = 'ios';
-export const CODEPUSH_DEPLOYMENT_KEY_ANDROID = 'sOEHpSnhGBhAvdgxqIvbV7cC_WB3BJOWMzHqQ';
-export const CODEPUSH_DEPLOYMENT_KEY_IOS = 'Pv7bKa_COn6GLddSt309URkmB76dHJk3SuNWE';
+export const CODEPUSH_DEPLOYMENT_KEY_ANDROID = 'YcoPjhkVGsWnfvhZLiT0YMCN3cYiHyrVcKyv4';
+export const CODEPUSH_DEPLOYMENT_KEY_IOS = 'fknS0vtDJBsn6k937Cd3JD9RBwqwSk_89K1DN';  // 'Pv7bKa_COn6GLddSt309URkmB76dHJk3SuNWE';
 export const CODEPUSH_DEPLOYMENT_KEY = Platform.OS === PLATFORM_ANDROID ? CODEPUSH_DEPLOYMENT_KEY_ANDROID : CODEPUSH_DEPLOYMENT_KEY_IOS;
 
 export const AQUISITION_REFERRED = 'REFERRED';
