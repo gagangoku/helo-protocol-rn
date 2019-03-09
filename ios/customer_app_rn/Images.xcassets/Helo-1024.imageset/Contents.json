@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "HomeDruid-512.png",
+      "filename" : "logo-1024-1024.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "logo-1024-1025.png",
       "scale" : "2x"
     },
     {
