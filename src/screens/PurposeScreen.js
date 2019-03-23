@@ -1,10 +1,11 @@
 import React from "react";
 import {Dimensions, StyleSheet, Text, TouchableHighlight, View} from "react-native";
 import common from '../styles/common';
-import {getContext, navigateTo, resetNavigation} from '../util/Util';
+import {getContext, getGpsLocation, navigateTo, resetNavigation} from '../util/Util';
 import {TEXT_COLOR} from "../Styles";
-import WebviewScreen from "./flows/normal/WebviewScreen";
 import SplashScreen from "./SplashScreen";
+import {MWEB_URL} from "../Constants";
+import format from 'string-format';
 
 
 export default class PurposeScreen extends React.Component {
@@ -21,13 +22,16 @@ export default class PurposeScreen extends React.Component {
     onMessageFn = (m) => {
         const data = m.nativeEvent.data;
         console.log('window.postMessage: ', data);
-        if (data === 'success') {
-            // Goto splash screen after 2 seconds
-            setTimeout(() => resetNavigation(this, SplashScreen.URL), 2000);
+        if (data.startsWith('code 2|')) {
+            // Customer created message. Goto splash screen after 1.5 seconds
+            setTimeout(() => resetNavigation(this, SplashScreen.URL), 1500);
         }
     };
-    signup = () => {
-        navigateTo(this, WebviewScreen.URL, { url: SIGNUP_URL + '?phoneNumber=' + this.ctx.phoneNumber, onMessageFn: this.onMessageFn });
+    signup = async () => {
+        const { latitude, longitude } = await getGpsLocation();
+        const url = format('{}/customer/entry?phoneNumber={}&gpsLatitude={}&gpsLongitude={}', MWEB_URL, this.ctx.phoneNumber, latitude, longitude);
+        console.log('onboarder url: ', url);
+        navigateTo(this, WebviewScreen.URL, { url, onMessageFn: this.onMessageFn });
     };
     render() {
         const reviewDiv = (
@@ -71,7 +75,7 @@ export default class PurposeScreen extends React.Component {
     }
 }
 
-const SIGNUP_URL = 'https://www.heloprotocol.in/customer/entry';
+const SIGNUP_URL = MWEB_URL + '/customer/entry';
 // const SIGNUP_URL = 'http://192.168.0.104:8092/customer/entry';
 const dimWidth = Dimensions.get('window').width;
 const dimHeight = Dimensions.get('window').height;

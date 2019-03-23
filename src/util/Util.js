@@ -233,3 +233,21 @@ export const haversineDistance = (point1, point2, latField='latitude', lonField=
 const toRad = (value) => {
     return value * Math.PI / 180;
 };
+
+
+
+export const getGpsLocation = async () => {
+    // Get gps location
+    const { latitude, longitude } = await new Promise((resolve, error) => navigator.geolocation.getCurrentPosition(
+        (position) => {
+            console.log('Gps position:', position);
+            resolve(position.coords);
+        },
+        (ex) => {
+            console.log('Gps position error:', ex);
+            error();
+        },
+        { enableHighAccuracy: true, timeout: 10000 }    // NOTE: This is needed to overwrite maximumAge parameter which causes problems: https://github.com/facebook/react-native/issues/7495
+    ));
+    return { latitude, longitude };
+};
