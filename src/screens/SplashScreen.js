@@ -87,19 +87,6 @@ export default class SplashScreen extends React.Component {
         // Get the saved phone number
         let p = await AsyncStorage.getItem(PHONE_NUMBER_KEY);
         console.log('phoneNumber from AsyncStorage: ', p);
-        // p = null;
-        // p = 1122334455;        // TODO: Remove after test
-        // p = 1122334456;        // TODO: Remove after test
-        // p = 9611298134;        // TODO: Remove after test
-        // p = 9008781096;        // TODO: Remove after test
-        // p = 9379058282;        // TODO: Remove after test
-        // p = 9980633992;        // TODO: Remove after test
-        // p = 9945293734;        // TODO: Remove after test
-        // p = 9008781099;        // TODO: Remove after test
-        // p = 9663827307;        // TODO: Remove after test
-        // p = 9717844155;        // TODO: Remove after test
-        // p = 9900607893;        // TODO: Remove after test
-        // p = 9845287003;        // TODO: Remove after test
         if (p) {
             // Subscribe to topic
             subscribeToTopic(p);

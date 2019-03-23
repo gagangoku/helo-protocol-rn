@@ -7,34 +7,19 @@ import {Dimensions, Platform} from "react-native";
 // NOTE: Do not forget to update this version everytime you release a codepush / playstore update.
 export const APP_VERSION = '1.0.5';
 
-export const HOST = 'https://api.heloprotocol.in';
+export const HOST = '<your host name>';
 // export const HOST = 'http://192.168.0.105:7071';
 // export const HOST = 'http://192.168.1.31:7071';
 
 export const MWEB_URL = 'https://www.heloprotocol.in';
 // export const MWEB_URL = 'http://192.168.0.104:8092';
 
-export const IMAGES_HOST = 'https://imageserver.heloprotocol.in';
-// export const IMAGES_HOST = 'http://192.168.0.104:7071';
-
 
 // Keys for referrals
 export const REFERRING_CUSTOMER_ID_KEY = 'referrring-customer-id';
 export const REFERRAL_OFFER_KEY = 'referral-offer';
 
-export const PHONE_NUMBER_KEY = 'phoneNumber-1';
-export const OTP_API = '/v1/otp/generate';
-export const CUSTOMER_SEARCH_API = '/v2/crm/customer/search';
-export const CUSTOMER_PROFILE_PAGE_API = '/v2/crm/customer/app/profile_page';
-export const COOK_SEARCH_API = '/v2/srm/supply/find';
-export const PLACE_REQUEST_API = '/v2/crm/newRequest';
-export const OTHER_INTERESTS_API = '/v2/crm/customer/other_interests';
-export const RATING_SUBMIT_API = '/v2/ratings/rate';
-export const COOK_RECOMMENDATION_API = '/v2/ratings/cook_recommendation';
-export const MAP_CUSTOMER_SUPPLY_PHONE_API = '/v1/exotel/get_connect_number';
-export const SUBMIT_CALL_STATUS_API = '/v1/new-jobs/customer_to_supply_call_status';
-
-export const X_ROLE_HEADER = "X-Role";
+// TODO: Your API's here
 
 export const SCREEN_WIDTH = Dimensions.get('window').width;
 export const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -60,13 +45,10 @@ export const NUM_DAYS_TO_SHOW_PREVIOUS_MONTHS_CALENDAR = 7;
 export const DAYS_OF_WEEK = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 export const LATITUDE_DELTA = 0.005;
 export const LONGITUDE_DELTA = 0.005;
-export const GOOGLE_MAPS_API_KEY = 'AIzaSyB_6Ly7ovRtYqb_p7QxxRSV3WnQh3b1e6Y';
 
 export const COOK_SRP_MAX_CUISINES_LENGTH = 25;
 export const COOK_SRP_MAX_LANGUAGES_LENGTH = 25;
 
-export const X_AUTH_HEADER = 'X-Authorization-Token';
-export const X_AUTH_TOKEN = 'C5F925633FEF36ED2B3E197F88AF5';
 export const CUSTOMER_CARE_NUMBER = '080-45683501';
 
 export const NUM_COOKS_TO_SHOW_IN_SEARCH_RESULTS = 25;
@@ -118,10 +100,3 @@ export const BAD_HABITS = [
 
 export const PLATFORM_ANDROID = 'android';
 export const PLATFORM_IOS = 'ios';
-export const CODEPUSH_DEPLOYMENT_KEY_ANDROID = 'YcoPjhkVGsWnfvhZLiT0YMCN3cYiHyrVcKyv4';
-export const CODEPUSH_DEPLOYMENT_KEY_IOS = 'fknS0vtDJBsn6k937Cd3JD9RBwqwSk_89K1DN';  // 'Pv7bKa_COn6GLddSt309URkmB76dHJk3SuNWE';
-export const CODEPUSH_DEPLOYMENT_KEY = Platform.OS === PLATFORM_ANDROID ? CODEPUSH_DEPLOYMENT_KEY_ANDROID : CODEPUSH_DEPLOYMENT_KEY_IOS;
-
-export const AQUISITION_REFERRED = 'REFERRED';
-export const AQUISITION_CAME_BY_COOK_RECOMMENDATION = 'CAME_BY_COOK_RECOMMENDATION';
-export const AQUISITION_SELF_APPLIED = 'SELF_APPLIED';
