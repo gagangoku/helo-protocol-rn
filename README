@@ -1,1 +1,6 @@
-This is the
+This is a sample repository for the Helo Protocol app.
+Includes a SplashScreen that checks for the latest version of codepush, if available, it installs.
+
+Also has some basic React Native features like push notifications with Firebase, sharing with Whatsapp / Facebook etc.
+
+Use this as a sample for some common branch.io workarounds as well
